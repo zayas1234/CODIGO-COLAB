@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Gestor de Archivos</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestor de Archivos de Texto y PDF</h1>
+        
+        <h2>Sube un archivo de texto</h2>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="archivo_texto" accept=".txt" required>
+            <button type="submit">Leer Archivo de Texto</button>
+        </form>
+
+        {% if contenido_archivo %}
+            <h3>Contenido del Archivo de Texto:</h3>
+            <pre>{{ contenido_archivo }}</pre>
+            {% if stats %}
+                <p>Estadísticas:</p>
+                <ul>
+                    <li>Líneas: {{ stats.lines }}</li>
+                    <li>Palabras: {{ stats.words }}</li>
+                    <li>Caracteres: {{ stats.characters }}</li>
+                </ul>
+            {% endif %}
+        {% endif %}
+
+        <h2>Sube un documento PDF</h2>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="archivo_pdf" accept=".pdf" required>
+            <button type="submit">Leer PDF</button>
+        </form>
+
+        {% if contenido_pdf %}
+            <h3>Contenido del PDF:</h3>
+            <pre>{{ contenido_pdf }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>
